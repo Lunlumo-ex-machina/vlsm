@@ -75,7 +75,13 @@ char Ipv4::getClass() const {
 }
 
 std::string Ipv4::toString() const {
-	return std::to_string(addr[0].to_ulong()) + '.' + std::to_string(addr[1].to_ulong()) + '.' + std::to_string(addr[2].to_ulong()) + '.' + std::to_string(addr[3].to_ulong());
+	std::string ip;
+	ip.reserve(15);
+	ip.append(std::to_string(addr[0].to_ulong()) + '.' + std::to_string(addr[1].to_ulong()) + '.' + std::to_string(addr[2].to_ulong()) + '.' + std::to_string(addr[3].to_ulong()));
+	for (int i = ip.size(); i < ip.capacity(); ++i) {
+		ip.push_back(' ');
+	}
+	return ip;
 }
 
 std::string Ipv4::toBinString() const {
